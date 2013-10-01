@@ -8,15 +8,16 @@ and the application loads the tiles.cfg layers definition.
 
 The tiles.cfg is loaded from a URL, so that it can dynamically be generated.
 
-The uwsgi is launched standalone, on port 8099, not daeomized, so that 
+The uwsgi is launched standalone, on port 8099, not daemonized, so that 
 log can be analyzed (it is supposed to be launched in a dev environment)
 
 You can run this outside a virtualenv, if you want, but you have to install both 
 uwsgi and mapnik.
 
-To install uwsgi, use pip install uwsgi, as it wiull download the latest version.
+To install uwsgi, use pip install uwsgi, as it will download the latest version.
 
-To install mapnik, try sudo port install py26-mapnik (or py27-mapnik), as it usually
+To install mapnik, try apt-get install python-mapnik2, 
+or sudo port install py26-mapnik (or py27-mapnik), as it usually
 should be a smoother pattern than using pip.
 
 
