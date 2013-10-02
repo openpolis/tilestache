@@ -2,8 +2,8 @@ This project contains configuration files and instructions needed to install and
 
 A tilestache server can be used to serve raster or vectorial tiles for google maps style applications.
 
-Requirements and Tilestache installation
-----------------------------------------
+Requirements and installation
+=============================
 
 The Tilestache python package need to be installed within a virtualenv_. It requires some image-processing,
 so some libraries need to be installed as OS packages, to handle jpeg, png and other image types.
@@ -40,7 +40,7 @@ Install the Tilestache_ python package::
 .. _virtualenv: https://pypi.python.org/pypi/virtualenv
 
 Test
-----
+====
 
 The Tileserver is a WSGI application.
 Provided a `tiles.cfg` configuration file, it can be run, for debugging purposes, through werkzeug_, by::
@@ -64,7 +64,7 @@ Extremely fast tiles serving can be obtained through caching_.
 
 
 Deploy Architecture (suggested)
--------------------------------
+===============================
 
 Your mileage may vary here, but the suggested architecture is:
 Nginx_ plus UWSGI_ set in empereor mode, started through Supervisor_
@@ -75,7 +75,7 @@ Nginx_ plus UWSGI_ set in empereor mode, started through Supervisor_
 
 
 Deploy instructions
--------------------
+===================
 
 ::
 
@@ -104,7 +104,7 @@ After every modifications in the `tiles.cfg` configuration, restart with::
     supervisorctl restart uwsgi-emperor
 
 Mapnik note
------------
+===========
 
 TileStache can be used to serve mapnik layers, but the mapnik2_ package needs to be installed.
 Compilations problems are known to exist and detailed instructions for installation within a virtualenv
