@@ -18,6 +18,7 @@ As for a Ubuntu 12.04 linux distribution::
     apt-get install python-pip
     pip install virtualenv virtualenvwrapper
 
+
 The libraries need to be linked in the `/usr/lib` path in order to correctly compile PIL_, which is a required package.
 
 Setup the virtualenvwrapper environment variables within ``.bashrc``::
@@ -38,6 +39,8 @@ Install the Tilestache_ python package::
 
 .. _PIL: http://www.pythonware.com/products/pil/
 .. _virtualenv: https://pypi.python.org/pypi/virtualenv
+
+
 
 Test
 ====
@@ -61,17 +64,6 @@ Extremely fast tiles serving can be obtained through caching_.
 
 .. _Tilestache: http://tilestache.org
 .. _werkzeug: http://werkzeug.pocoo.org/
-
-
-Deploy Architecture (suggested)
-===============================
-
-Your mileage may vary here, but the suggested architecture is:
-Nginx_ plus UWSGI_ set in empereor mode, started through Supervisor_
-
-.. _Nginx: http://wiki.nginx.org/Main
-.. _UWSGI: http://uwsgi-docs.readthedocs.org/en/latest/
-.. _Supervisor: http://supervisord.org/
 
 
 Deploy instructions
@@ -103,6 +95,7 @@ After every modifications in the `tiles.cfg` configuration, restart with::
 
     supervisorctl restart uwsgi-emperor
 
+
 Mapnik note
 ===========
 
@@ -114,15 +107,17 @@ can not be written at the current time.
 
 
 Caching strategies
-------------------
+==================
 
 Tilestache allows different caching_ mechanism to speedup the tile-serving process.
 Add one of the following ``cache`` sections to the configuration file.
 
 Disk cache
-==========
+++++++++++
 
 The path is relative to the ``chdir`` specified in ``uwsgi.ini``.
+
+::
 
    "cache":
      {
@@ -134,7 +129,7 @@ The path is relative to the ``chdir`` specified in ``uwsgi.ini``.
 
 
 Redis
-=====
++++++
 
 Requires redis_ and the `python redis package`_.
 
@@ -153,8 +148,10 @@ Requires redis_ and the `python redis package`_.
 .. _redis:  http://redis.io
 .. _python redis package: https://pypi.python.org/pypi/redis
 
-S3
-==
+
+S3 cache
+++++++++
+
 Caches tiles to `Amazon S3`_, requires boto_
 
 ::
@@ -170,8 +167,10 @@ Caches tiles to `Amazon S3`_, requires boto_
 .. _Amazon S3: http://aws.amazon.com/s3/
 .. _boto:  https://github.com/boto/boto
 
+
 Multi
-=====
+^^^^^
+
 Multi-tiered caches can be used to mix speed and storage.
 
 ::
@@ -198,3 +197,4 @@ Multi-tiered caches can be used to mix speed and storage.
 
 
 .. _caching:  See http://tilestache.org/doc/#caches
+
