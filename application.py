@@ -1,4 +1,7 @@
+from os import environ
 import TileStache
-# tiles.cfg is used for geoJson maps
-application = TileStache.WSGITileServer('tiles.cfg')
+
+# read config file or URL from environment, defaults to tiles.cfg
+config_file = environ.get('CONFIG_FILE', 'tiles.cfg')
+application = TileStache.WSGITileServer(config_file)
 
