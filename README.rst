@@ -57,11 +57,10 @@ The sample configuration presented in the repository only shows how to set up a 
 for the a particular Cloudmade.com map style, for which you need an API_KEY.
 See the Tilestache_ documentation to check many other possible possibilities.
 
-Extremely fast tiles serving can be obtained through redis_ based caching.
+Extremely fast tiles serving can be obtained through caching_.
 
 .. _Tilestache: http://tilestache.org
 .. _werkzeug: http://werkzeug.pocoo.org/
-.. _redis:  http://redis.io
 
 
 Deploy Architecture (suggested)
@@ -100,6 +99,10 @@ environment variable, cascading to ``tiles.cfg`` by default.
 The uwsgi is launched through supervisor and logs the activity of the tilestache server.
 The logging level can be specified in the logging section of tiles.cfg.
 
+After every modifications in the `tiles.cfg` configuration, restart with::
+
+    supervisorctl restart uwsgi-emperor
+
 Mapnik note
 -----------
 
@@ -108,3 +111,90 @@ Compilations problems are known to exist and detailed instructions for installat
 can not be written at the current time.
 
 .. _mapnik2: https://github.com/mapnik/mapnik/wiki/Mapnik2
+
+
+Caching strategies
+------------------
+
+Tilestache allows different caching_ mechanism to speedup the tile-serving process.
+Add one of the following ``cache`` sections to the configuration file.
+
+Disk cache
+==========
+
+The path is relative to the ``chdir`` specified in ``uwsgi.ini``.
+
+   "cache":
+     {
+       "name": "Disk",
+       "path": "cache/",
+       "umask": "0000"
+     },
+     ...
+
+
+Redis
+=====
+
+Requires redis_ and the `python redis package`_.
+
+::
+
+   "cache": {
+      "name": "Redis",
+      "host": "localhost",
+      "port": 6379,
+      "db": 0,
+      "key prefix": "tilestache"
+    },
+    ...
+
+
+.. _redis:  http://redis.io
+.. _python redis package: https://pypi.python.org/pypi/redis
+
+S3
+==
+Caches tiles to `Amazon S3`_, requires boto_
+
+::
+
+   "cache": {
+      "name": "S3",
+      "bucket": "<bucket name>",
+      "access": "<access key>",
+      "secret": "<secret key>",
+      "reduced_redundancy": "False"
+   },
+
+.. _Amazon S3: http://aws.amazon.com/s3/
+.. _boto:  https://github.com/boto/boto
+
+Multi
+=====
+Multi-tiered caches can be used to mix speed and storage.
+
+::
+
+      "cache": {
+        "name": "Multi",
+        "tiers": [
+            {
+               "name": "Redis",
+               "host": "localhost",
+               "port": 6379,
+               "db": 3,
+               "key prefix": "tilestache"
+            },
+            {
+               "name": "S3",
+               "bucket": "<bucket name>",
+               "access": "<access key>",
+               "secret": "<secret key>",
+               "reduced_redundancy": "False"
+            }
+        ]
+      },
+
+
+.. _caching:  See http://tilestache.org/doc/#caches
