@@ -100,8 +100,9 @@ Mapnik note
 ===========
 
 TileStache can be used to serve mapnik layers, but the mapnik2_ package needs to be installed.
-Compilations problems are known to exist and detailed instructions for installation within a virtualenv
-can not be written at the current time.
+
+To install mapnik in a virtualenv, under osx, the (unorthodox) procedure described at
+http://lab.openpolis.it/using-mapnik-inside-a-virtualenv-on-osx.html can be followed.
 
 .. _mapnik2: https://github.com/mapnik/mapnik/wiki/Mapnik2
 
