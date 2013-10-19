@@ -1,0 +1,11 @@
+ModestMaps==1.4.2
+PIL==1.1.7
+Pygments==1.6
+TileStache==1.49.8
+Werkzeug==0.9.4
+boto==2.13.3
+bpython==0.12
+redis==2.8.0
+simplejson==3.3.0
+uWSGI==1.9.18.2
+wsgiref==0.1.2
