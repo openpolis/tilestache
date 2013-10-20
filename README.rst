@@ -199,3 +199,22 @@ Multi-tiered caches can be used to mix speed and storage.
 
 .. _caching:  See http://tilestache.org/doc/#caches
 
+
+Example
+^^^^^^^
+
+An example configuration is contained in ``tiles_example.cfg``. It contains a proxy to a cloudmade layer,
+and a small mapnik layer, pointing to an XML file published with Tilemill.
+
+Before running the example, copy ``tiles_sample.cfg`` into ``tiles_example.cfg``, 
+and substitute your cloudmade's API_KEY and STYLE_ID.
+
+To run the example on an OSX machine, you need to execute these scripts while in ``tilestache`` virtualenv::
+
+    CONFIG_FILE=tiles_example.cfg; uwsgi --ini uwsgi_dev_osx.ini
+    python -m SimpleHTTPServer
+
+Then you can see a map of northern Italy, colored in shades of green, with::
+
+    http://localhost:8000/example.html
+

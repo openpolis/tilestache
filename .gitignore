@@ -1,5 +1,4 @@
 .idea
 /cache/*
 tiles.cfg
-mapnik-maps
-
+tiles_example.cfg

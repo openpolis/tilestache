@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="#dedede">
+
+
+<Style name="countries" filter-mode="first">
+  <Rule>
+    <PolygonSymbolizer fill="#efefef" />
+  </Rule>
+</Style>
+<Style name="countries-outline" filter-mode="first">
+  <Rule>
+    <LineSymbolizer stroke="#ffffff" stroke-width="2" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Layer name="countries"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>countries-outline</StyleName>
+    <StyleName>countries</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/Users/guglielmo/Documents/MapBox/project/regioni/layers/countries/82945364-10m-admin-0-countries.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="regioni" filter-mode="first">
+  <Rule>
+    <Filter>([COD_REG] = 6)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1.5" />
+    <PolygonSymbolizer fill="#969491" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([COD_REG] = 5)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1.5" />
+    <PolygonSymbolizer fill="#2d2b2a" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([COD_REG] = 4)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1.5" />
+    <PolygonSymbolizer fill="#676462" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([COD_REG] = 3)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1.5" />
+    <PolygonSymbolizer fill="#969491" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([COD_REG] = 2)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1.5" />
+    <PolygonSymbolizer fill="#c9c7c3" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([COD_REG] = 1)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1.5" />
+    <PolygonSymbolizer fill="#eae7df" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <PolygonSymbolizer fill="#dedede" fill-opacity="1" />
+    <LineSymbolizer stroke="#ffffff" stroke-width="1.5" />
+  </Rule>
+</Style>
+<Layer name="regioni"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>regioni</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/Users/guglielmo/Documents/MapBox/project/regioni/layers/regioni/regioni_stats.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="province" filter-mode="first">
+  <Rule>
+    <Filter>([COD_PRO] = 35)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1" />
+    <PolygonSymbolizer fill="#969491" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([COD_PRO] = 17)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1" />
+    <PolygonSymbolizer fill="#676462" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([COD_PRO] = 67)</Filter>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1" />
+    <PolygonSymbolizer fill="#c9c7c3" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <LineSymbolizer stroke="#ffffff" stroke-width="1" />
+    <PolygonSymbolizer fill-opacity="1" fill="#efefef" />
+  </Rule>
+</Style>
+<Layer name="province"
+  srs="+proj=utm +zone=32 +ellps=intl +units=m +no_defs">
+    <StyleName>province</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/Users/guglielmo/Documents/MapBox/project/regioni/layers/province/prov2011_g.shp]]></Parameter>
+       <Parameter name="id"><![CDATA[province]]></Parameter>
+       <Parameter name="project"><![CDATA[regioni]]></Parameter>
+       <Parameter name="srs"><![CDATA[null]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>
