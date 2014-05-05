@@ -1,0 +1,17 @@
+{
+    "attribution": "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>",
+    "center": [12.5024,41.6893,6],
+    "bounds": [6.1523,35.084,19.0723,47.5617],
+    "description":"Autonomia finanziaria dei comuni italiani",
+    "id":"examples.map-zmy97flj",
+    "legend":"",
+    "maxzoom":11,
+    "minzoom":5,
+    "name":"Mapbox iOS Example (Interaction)",
+    "private":true,
+    "scheme":"xyz",
+    "template": "{{#__location__}}{{/__location__}}{{#__teaser__}}Comune di {{{denominazione}}} ({{{prov}}})<br/>\nPop: {{{pop}}} (Cluster {{{cluster}}})<br/>\n<strong style='font-size: 15px'>{{{valore}}}%</strong><br/> {{/__teaser__}}{{#__full__}}{{/__full__}}",
+    "tilejson":"2.0.0",
+    "tiles": ["http://localhost:8083/autof_2010/{z}/{x}/{y}.png"],
+    "grids": ["http://localhost:8083/grid_2010/{z}/{x}/{y}.json"]
+}

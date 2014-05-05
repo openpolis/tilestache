@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="#b8dee6" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+
+<Parameters>
+  <Parameter name="bounds">6.1523,35.084,19.0723,47.5617</Parameter>
+  <Parameter name="center">12.5024,41.6893,6</Parameter>
+  <Parameter name="format">png</Parameter>
+  <Parameter name="interactivity_layer">autonomia-finanziaria</Parameter>
+  <Parameter name="interactivity_fields">anno,denominazione,prov,regione,pop,cluster,valore,id</Parameter>
+  <Parameter name="minzoom">6</Parameter>
+  <Parameter name="maxzoom">10</Parameter>
+  <Parameter name="name"><![CDATA[AutonomiaFinanziaria 2004]]></Parameter>
+  <Parameter name="description"><![CDATA[Autonomia finanziaria dei comuni.]]></Parameter>
+  <Parameter name="legend"><![CDATA[% di autonomia finanziaria
+]]></Parameter>
+  <Parameter name="version">1.0.0</Parameter>
+  <Parameter name="template"><![CDATA[{{#__location__}}{{/__location__}}{{#__teaser__}}<strong>Anno {{{anno}}}</strong><br/>
+Comune di {{{denominazione}}} ({{{prov}}})<br/>
+Regione: {{{regione}}}<br/>
+Pop: {{{pop}}} (Cluster {{{cluster}}})<br/>
+<strong>Autonomia finanziaria</strong>: {{{valore}}}%<br/> {{/__teaser__}}{{#__full__}}{{/__full__}}]]></Parameter>
+</Parameters>
+
+<Style name="autonomia-finanziaria" filter-mode="first" >
+  <Rule>
+    <Filter>([valore] &gt;= 85)</Filter>
+    <LineSymbolizer stroke="#b4b6b3" stroke-width="0.5" />
+    <PolygonSymbolizer fill="#01665e" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([valore] &gt;= 70)</Filter>
+    <LineSymbolizer stroke="#b4b6b3" stroke-width="0.5" />
+    <PolygonSymbolizer fill="#5ab4ac" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([valore] &gt;= 55)</Filter>
+    <LineSymbolizer stroke="#b4b6b3" stroke-width="0.5" />
+    <PolygonSymbolizer fill="#c7eae5" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([valore] &gt;= 40)</Filter>
+    <LineSymbolizer stroke="#b4b6b3" stroke-width="0.5" />
+    <PolygonSymbolizer fill="#f5f5f5" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([valore] &gt;= 25)</Filter>
+    <LineSymbolizer stroke="#b4b6b3" stroke-width="0.5" />
+    <PolygonSymbolizer fill="#f6e8c3" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([valore] &gt;= 15)</Filter>
+    <LineSymbolizer stroke="#b4b6b3" stroke-width="0.5" />
+    <PolygonSymbolizer fill="#d8b365" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <Filter>([valore] &gt; 0)</Filter>
+    <LineSymbolizer stroke="#b4b6b3" stroke-width="0.5" />
+    <PolygonSymbolizer fill="#8c510a" fill-opacity="1" />
+  </Rule>
+  <Rule>
+    <LineSymbolizer stroke="#b4b6b3" stroke-width="0.5" />
+    <PolygonSymbolizer fill-opacity="1" fill="#000000" />
+  </Rule>
+</Style>
+<Layer name="autonomia-finanziaria"
+  srs="+proj=longlat +datum=WGS84 +no_defs">
+    <StyleName>autonomia-finanziaria</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[(select t.id, t.denominazione, t.prov, t.regione, t.cluster, c.bil_popolazione_residente as pop, i.anno, round(cast (i.valore as numeric), 2) as valore, t.geom from territori_territorio t join bilanci_valoreindicatore i on t.id=i.territorio_id join territori_contesto c on c.territorio_id=t.id and t.territorio='C' and i.anno=c.anno and i.indicatore_id=1 and c.anno=2010) as indicatore]]></Parameter>
+       <Parameter name="key_field"><![CDATA[id]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geom]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[dynamic]]></Parameter>
+       <Parameter name="extent"><![CDATA[]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="dbname"><![CDATA[open_bilanci]]></Parameter>
+       <Parameter name="user"><![CDATA[guglielmo]]></Parameter>
+       <Parameter name="id"><![CDATA[autonomia-finanziaria]]></Parameter>
+       <Parameter name="project"><![CDATA[bilancio_test]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=longlat +datum=WGS84 +no_defs]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="regioni" filter-mode="first" >
+  <Rule>
+    <LineSymbolizer stroke="#e5e8e4" stroke-width="2.5" stroke-dasharray="3, 10" />
+  </Rule>
+</Style>
+<Layer name="regioni"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>regioni</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/Users/guglielmo/Documents/MapBox/project/bilancio_test/layers/regioni/regioni_stats.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>

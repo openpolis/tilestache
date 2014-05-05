@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Legend</title>
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+<script src='static/js/mapbox.js/mapbox.js'></script>
+<link href='static/js/mapbox.js/mapbox.css' rel='stylesheet' />
+
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  .map-tooltip { width: 300px; }
+  .map-legends { width: 375px; max-width: 500px; }
+</style>
+</head>
+
+<body>
+
+
+<div id='map'></div>
+
+<div id='legend-content' style='display: none;'>
+  <div class='my-legend'>
+  <div class='legend-title'>% di Autonomia Finanziaia dei comuni nel ANNO</div>
+  <div class='legend-scale'>
+    <ul class='legend-labels'>
+      <li><span style='background:#8c510a;'></span>0 - 15%</li>
+      <li><span style='background:#d8b365;'></span>15 - 25%</li>
+      <li><span style='background:#f6e8c3;'></span>25 - 40%</li>
+      <li><span style='background:#f5f5f5;'></span>40 - 55%</li>
+      <li><span style='background:#c7eae5;'></span>55 - 70%</li>
+      <li><span style='background:#5ab4ac;'></span>70 - 85%</li>
+      <li><span style='background:#01665e;'></span>85 - 100%</li>
+    </ul>
+  </div>
+  <div class='legend-source'>Fonte: <a href="http://finanzalocale.interno.it/">Min. degli Interni</a>. Elaborazione <a href="http://www.openpolis.it/">Openpolis</a></div>
+  </div>
+
+  <style type='text/css'>
+    .my-legend .legend-title {
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 90%;
+      }
+    .my-legend .legend-scale ul {
+      margin: 0;
+      padding: 0;
+      float: left;
+      list-style: none;
+      }
+    .my-legend .legend-scale ul li {
+      display: block;
+      float: left;
+      width: 50px;
+      margin-bottom: 6px;
+      text-align: center;
+      font-size: 80%;
+      list-style: none;
+      }
+    .my-legend ul.legend-labels li span {
+      display: block;
+      float: left;
+      height: 15px;
+      width: 50px;
+      }
+    .my-legend .legend-source {
+      font-size: 80%;
+      color: #999;
+      clear: both;
+      }
+    .my-legend a {
+      color: #777;
+      }
+  </style>
+</div>
+
+<script src='static/js/leaflet-hash.js'></script>
+
+<script>
+  var year  = window.location.search.replace("?anno=", "");
+  if (year == "" || parseInt(year) < 2009 || parseInt(year) > 2012){
+      year = 2009
+  }
+
+  hash = window.location.hash;
+  tilejson_url = "http://localhost/tilestache/autof_" + year + ".json";
+  var map = L.mapbox.map('map', tilejson_url);
+  var hashed_map = L.hash(map);
+
+  // restore zoom level and center coords, from hash
+  var parsed = hashed_map.parseHash(hash);
+  if (parsed) {
+        hashed_map.movingMap = true;
+        hashed_map.map.setView(parsed.center, parsed.zoom);
+        hashed_map.movingMap = false;
+  }
+
+  map.legendControl.addLegend(document.getElementById('legend-content').innerHTML.replace("ANNO", year));
+</script>
+
+
+</body>
+</html>

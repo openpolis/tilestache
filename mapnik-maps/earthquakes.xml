@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="#b8dee6" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+
+<Parameters>
+  <Parameter name="bounds">-180,-85.0511,180,85.0511</Parameter>
+  <Parameter name="center">0,0,2</Parameter>
+  <Parameter name="format">png</Parameter>
+  <Parameter name="interactivity_layer">earthquakes</Parameter>
+  <Parameter name="interactivity_fields">DateTime,Latitude,Longitude,Magnitude,MagType,Depth,Source,EventID</Parameter>
+  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="maxzoom">6</Parameter>
+  <Parameter name="name"><![CDATA[Earthquakes tutorial]]></Parameter>
+  <Parameter name="description"><![CDATA[Il tutorial di TileMill]]></Parameter>
+  <Parameter name="legend"><![CDATA[<strong>Eventi di magnitudine 2.5 o superiore nella scorsa settimana</strong><br/>
+La dimensione dei cerchi indica la magnitudine dell'evento.]]></Parameter>
+  <Parameter name="template"><![CDATA[{{#__location__}}{{/__location__}}{{#__teaser__}}
+<b>At</b>: {{{DateTime}}}<br/> 
+Location: (LAT:{{{Latitude}}}, LON:{{{Longitude}}})<br/>
+<b>Magnitude</b>: {{{Magnitude}}}, {{{MagType}}}<br/> 
+<b>Depth</b>: {{{Depth}}}<br/> 
+Source: {{{Source}}}<br/> 
+EventId: {{{EventID}}}{{/__teaser__}}{{#__full__}}{{/__full__}}]]></Parameter>
+</Parameters>
+
+
+<Style name="countries" filter-mode="first" >
+  <Rule>
+    <PolygonSymbolizer fill="#ffffff" />
+  </Rule>
+</Style>
+<Style name="countries-outline" filter-mode="first" >
+  <Rule>
+    <LineSymbolizer stroke="#85c5d3" stroke-width="2" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Layer name="countries"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>countries-outline</StyleName>
+    <StyleName>countries</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/Users/guglielmo/Documents/MapBox/project/earthquakes/layers/countries/82945364-10m-admin-0-countries.shp]]></Parameter>
+       <Parameter name="type"><![CDATA[shape]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="earthquakes" filter-mode="first" >
+  <Rule>
+    <Filter>([Magnitude] &gt;= 7)</Filter>
+    <MarkersSymbolizer width="50" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <Filter>([Magnitude] &gt;= 6)</Filter>
+    <MarkersSymbolizer width="30" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <Filter>([Magnitude] &gt;= 5.5)</Filter>
+    <MarkersSymbolizer width="20" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <Filter>([Magnitude] &gt;= 5)</Filter>
+    <MarkersSymbolizer width="15" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <Filter>([Magnitude] &gt;= 4.5)</Filter>
+    <MarkersSymbolizer width="14" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <Filter>([Magnitude] &gt;= 4)</Filter>
+    <MarkersSymbolizer width="12" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <Filter>([Magnitude] &gt;= 3.5)</Filter>
+    <MarkersSymbolizer width="10" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <Filter>([Magnitude] &gt;= 3)</Filter>
+    <MarkersSymbolizer width="8" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <Filter>([Magnitude] &gt;= 2.5)</Filter>
+    <MarkersSymbolizer width="6" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+  <Rule>
+    <MarkersSymbolizer width="3" fill="#d2323f" stroke="#8c1436" allow-overlap="true" />
+  </Rule>
+</Style>
+<Layer name="earthquakes"
+  srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>earthquakes</StyleName>
+    <Datasource>
+       <Parameter name="file"><![CDATA[/Users/guglielmo/Documents/MapBox/project/earthquakes/layers/earthquakes.txt]]></Parameter>
+       <Parameter name="id"><![CDATA[earthquakes]]></Parameter>
+       <Parameter name="project"><![CDATA[earthquakes]]></Parameter>
+       <Parameter name="srs"><![CDATA[]]></Parameter>
+       <Parameter name="type"><![CDATA[csv]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>

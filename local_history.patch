@@ -1,0 +1,19 @@
+Index: ../../.virtualenvs/tilestache/lib/python2.7/site-packages/TileStache/__init__.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../.virtualenvs/tilestache/lib/python2.7/site-packages/TileStache/__init__.py	(revision )
++++ ../../.virtualenvs/tilestache/lib/python2.7/site-packages/TileStache/__init__.py	(revision )
+@@ -252,7 +252,10 @@
+             return 302, headers, 'You are being redirected to %s\n' % redirect_uri
+         
+         else:
+-            status_code, headers, content = layer.getTileResponse(coord, extension)
++            status_code, new_headers, content = layer.getTileResponse(coord, extension)
++            for k,v in new_headers.items():
++                headers[k] = v
++
+     
+         if callback and 'json' in headers['Content-Type']:
+             headers['Content-Type'] = 'application/javascript; charset=utf-8'
